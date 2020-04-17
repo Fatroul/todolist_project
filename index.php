@@ -26,15 +26,19 @@ switch($root) {
 function showHome() {
     return "home.php";
 }
-
+//$verif_pass = $_POST["user_password2"];
 function insertUser() {
+
+empty($_POST["user_name"]) && !empty($_POST["user_mail"]) && !empty($_POST["user_password"]) && $_POST["user_password"] === $_POST["user_password2"]){    if(!
+
+
     $user = new User();
     $user->setNickname($_POST["user_name"]);
-    $user->setEmail($POST["user_mail"]);
-    $user->setPassword($_POST["user_password"]);
+    $user->setEmail($_POST["user_mail"]);
+    $user->setPassword(password_hash($_POST["user_password"], PASSWORD_DEFAULT));
 
     $user->saveUser();
-
+    }
     header("Location:index.php");
 }
 
@@ -56,6 +60,6 @@ function insertUser() {
 </head>
 <body>
 <h1>Ma Todolist.</h1>
-<?php require $include; ?>
+<?php include $include; ?>
 </body>
 </html>

@@ -6,6 +6,7 @@ class User {
     private $nickname;
     private $email;
     private $password;
+    //private $password2;
     
 
     function getUserId(): int {
@@ -37,18 +38,24 @@ class User {
 
         $tab = json_decode(file_get_contents("users.json"));
 
+        $unique = true;
+        foreach($tab as $element) {
+            if($element->nickname == $this->nickname) {
+                $unique = false;
+            }
+        }
+
         $user = [
-            "userId" => 1,
+            "userId" => sizeof($tab) + 1,
             "nickName" => $this->nickname,
             "email" => $this->email,
             "password" => $this->password 
-
         ];
-    
-    array_push($tab, $user);
-    $users_json = json_encode($tab);
-    file_put_contents("users.json", $users_json);
-    }
-    
-}
+    if($unique) {
+        array_push($tab, $user);
+        $users_json = json_encode($tab);
+        file_put_contents("users.json", $users_json);
+                }
+            }                       
+        }
 ?>

@@ -7,7 +7,7 @@
     </p>
     <p>
     <label for="user_password">Votre mot de passe:</label>
-    <input type="text" id="user_password" name="user_password">
+    <input type="password" id="user_password" name="user_password">
     </p>
     <p><input type="submit" value="Se connecter..."></p>
 </form>

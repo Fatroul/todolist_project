@@ -11,9 +11,9 @@
     </p>
     <p>
         <label for="user_password">Votre mot de passe:</label>
-        <input type="text" id="user_password" name="user_password">
-        <label for="user_password">Vérifier le mot de passe:</label>
-        <input type="text" id="user_password" name="user_password">
+        <input type="password" id="user_password" name="user_password">
+        <label for="user_password2">Vérifier le mot de passe:</label>
+        <input type="password" id="user_password2" name="user_password2">
     </p>
     <p><input type="submit" value="S'inscrire..."></p>
 </form>
