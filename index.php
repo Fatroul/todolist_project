@@ -29,7 +29,7 @@ function showHome() {
 //$verif_pass = $_POST["user_password2"];
 function insertUser() {
 
-empty($_POST["user_name"]) && !empty($_POST["user_mail"]) && !empty($_POST["user_password"]) && $_POST["user_password"] === $_POST["user_password2"]){    if(!
+if(!empty($_POST["user_name"]) && !empty($_POST["user_mail"]) && !empty($_POST["user_password"]) && $_POST["user_password"] === $_POST["user_password2"]){
 
 
     $user = new User();

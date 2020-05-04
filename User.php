@@ -6,7 +6,18 @@ class User {
     private $nickname;
     private $email;
     private $password;
+    private $pdo;
     //private $password2;
+
+    function __construct($id=null) {
+        $this->pdo=new PDO();
+        $this->id=$id;
+        $this->nickname=$nickname;
+        $this->email=$email;
+        $this->password=$password;
+    } 
+
+
     
 
     function getUserId(): int {
