@@ -1,10 +1,13 @@
 <?php 
+session_start();
+var_dump ($_SESSION);
 // 1. INCLUSIONS CLASSES
 // Dans un premier temps, nous allons inclure les fichiers de nos classes ici pour pouvoir les utiliser
 
 
 
 require_once "User.php";
+//require "conf/global.php";
 
 // 2. ROUTER
 // Structure permettant d'appeler une action en fonction de la requête utilisateur
@@ -15,7 +18,13 @@ switch($root) {
 
     case "home" : $include = showHome();
     break;
+    case "membre" : $include = showMembre();
+    break;
     case "insert_user" : insertUser();
+    break;
+    case "connect_user" : connectUser();
+    break;
+    case "deconnect" : deconnectUser();
     break;
     default ; $include = showHome() ;
 }
@@ -24,7 +33,14 @@ switch($root) {
 // Actions déclenchées en fonction du choix de l'utilisateur
 // 1 choix = 1 fonction
 function showHome() {
+    if(isset($_SESSION["user"])) {
+        header("Location:index.php?route=membre");
+    }
     return "home.php";
+}
+
+function showMembre () {
+    return "membre.php";
 }
 //$verif_pass = $_POST["user_password2"];
 function insertUser() {
@@ -42,6 +58,25 @@ if(!empty($_POST["user_name"]) && !empty($_POST["user_mail"]) && !empty($_POST["
     header("Location:index.php");
 }
 
+function connectUser() {
+    
+    if(!empty($_POST["user_name"]) && !empty($_POST["user_password"])) {
+        $user = new User();
+        $user->setNickname($_POST["user_name"]);
+        $new = $user->verifyUser()?? false;
+        if($new) {
+            if(password_verify($_POST["user_password"], $new->user_password)) {
+                $_SESSION["user"]=$new;
+            }
+        }
+    }
+    header("Location:index.php");
+}
+
+function deconnectUser() {
+    unset($_SESSION["user"]);
+    header("Location:index.php");
+}
 
 
 

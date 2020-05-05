@@ -1,6 +1,6 @@
 <section>
 <h2>Connectez-vous...</h2>
-<form action="index.php?root=insert_user" method="post">
+<form action="index.php?root=connect_user" method="post">
     <p>
         <label for="user_name">Votre pseudo:</label>
         <input type="text" id="user_name" name="user_name">

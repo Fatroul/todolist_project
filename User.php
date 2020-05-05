@@ -6,17 +6,14 @@ class User {
     private $nickname;
     private $email;
     private $password;
-    private $pdo;
+    //private $pdo;
     //private $password2;
 
-    function __construct($id=null) {
-        $this->pdo=new PDO();
+    /*function __construct($id=null) {
+        $this->pdo=new PDO(totolist,"root","");
         $this->id=$id;
-        $this->nickname=$nickname;
-        $this->email=$email;
-        $this->password=$password;
     } 
-
+*/
 
     
 
@@ -66,7 +63,15 @@ class User {
         array_push($tab, $user);
         $users_json = json_encode($tab);
         file_put_contents("users.json", $users_json);
-                }
-            }                       
-        }
+            }
+        } 
+    function verifyUser() {
+        $tab=json_decode(file_get_contents("users.json"));
+        foreach($tab as $user) {
+            if($this->nickname == $user->nickname) {
+                return $user;
+            }
+        } 
+    }                      
+}
 ?>
