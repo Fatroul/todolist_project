@@ -1,7 +1,7 @@
 <?php
 
 
-class User {
+class User extends Dbconnect {
     private $userid;
     private $nickname;
     private $email;
@@ -72,6 +72,40 @@ class User {
                 return $user;
             }
         } 
-    }                   
+    }       
+    function insert() {
+
+    }
+
+    function update() {
+
+    }
+
+    function delete() {
+
+    }
+
+    function selectAll() {
+        $query = "SELECT id_user, pseudo, password FROM Users";
+        $result = $this->pdo->prepare($query);
+        $result->execute();
+
+        $datas = $result->fetchAll();
+        $datatab = [];
+        foreach ($datas as $data) {
+            $user = new User();
+            $user->setUserId($data["id_user"]);
+            $user->setNickname($data["pseudo"]);
+            $user->setPassword($data["password"]);             
+            array_push($datatab, $user);
+        }
+
+        return $datatab;
+    } 
+
+    function select() {
+
+    } 
+
 }
 ?>

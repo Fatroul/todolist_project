@@ -44,6 +44,8 @@ function showHome() {
 }
 
 function showMembre() {
+    $user = new User();
+    var_dump($user->selectAll());
     return "membre.php";
 }
 //$verif_pass = $_POST["user_password2"];
