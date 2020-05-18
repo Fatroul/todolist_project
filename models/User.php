@@ -74,6 +74,13 @@ class User extends Dbconnect {
         } 
     }       
     function insert() {
+        $query = "INSERT INTO Users (`pseudo`,`email`,`password`)
+                    VALUES (:pseudo, :password)";
+        $result = $this->pdo->prepare($query);
+        $result->bindValue(":pseudo", $this->pseudo, PDO::PARAM_STR);
+        $result->bindValue(":email", $this->email, PDO::PARAM_STR);
+        $result->bindValue(":password", $this->password, PDO::PARAM_STR);
+        $result->execute();
 
     }
 
@@ -86,7 +93,7 @@ class User extends Dbconnect {
     }
 
     function selectAll() {
-        $query = "SELECT id_user, pseudo, password FROM Users";
+        $query = "SELECT id_user, pseudo, email, password FROM Users";
         $result = $this->pdo->prepare($query);
         $result->execute();
 
@@ -96,6 +103,7 @@ class User extends Dbconnect {
             $user = new User();
             $user->setUserId($data["id_user"]);
             $user->setNickname($data["pseudo"]);
+            $user->setEmail($data["email"]);
             $user->setPassword($data["password"]);             
             array_push($datatab, $user);
         }
